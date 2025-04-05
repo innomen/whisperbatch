@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Whisper cache and models
+whisper.cpp/
+*.bin
+*.pth
+models/
+*.model
+.whisper/
+.cache/
+.cache/
+
+# System/macOS
+.DS_Store
+
+# Other
+*.log
+*.swp
