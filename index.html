@@ -41,16 +41,8 @@ header {
   margin-bottom: 2rem;
 }
 
-header h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 0.3rem;
-}
-
-header p {
-  color: var(--text-dim);
-  font-size: 0.95rem;
-}
+header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+header p { color: var(--text-dim); font-size: 0.95rem; }
 
 .privacy-badge {
   display: inline-block;
@@ -80,7 +72,6 @@ header p {
   letter-spacing: 0.05em;
 }
 
-/* Model selector */
 .model-row {
   display: flex;
   gap: 1rem;
@@ -88,10 +79,7 @@ header p {
   flex-wrap: wrap;
 }
 
-.model-row label {
-  flex: 1;
-  min-width: 200px;
-}
+.model-row label { flex: 1; min-width: 200px; }
 
 .model-row label span {
   display: block;
@@ -100,10 +88,7 @@ header p {
   margin-bottom: 0.4rem;
 }
 
-select, button {
-  font-family: inherit;
-  font-size: 0.95rem;
-}
+select, button { font-family: inherit; font-size: 0.95rem; }
 
 select {
   width: 100%;
@@ -121,11 +106,11 @@ select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
   font-size: 0.82rem;
   color: var(--text-dim);
   padding: 0.5rem 0;
-  min-width: 140px;
+  min-width: 200px;
   text-align: right;
 }
 
-.backend-info .chip {
+.chip {
   display: inline-block;
   padding: 0.15rem 0.5rem;
   border-radius: 4px;
@@ -133,8 +118,30 @@ select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
   font-weight: 600;
 }
 
-.chip.webgpu { background: rgba(74, 222, 128, 0.15); color: var(--green); }
-.chip.wasm { background: rgba(251, 146, 60, 0.15); color: var(--orange); }
+.chip.ok { background: rgba(74, 222, 128, 0.15); color: var(--green); }
+.chip.warn { background: rgba(251, 146, 60, 0.15); color: var(--orange); }
+.chip.bad { background: rgba(248, 113, 113, 0.15); color: var(--red); }
+
+/* Error banner */
+.error-banner {
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.2rem;
+  color: var(--red);
+  display: none;
+}
+
+.error-banner.visible { display: block; }
+.error-banner h3 { margin-bottom: 0.5rem; font-size: 1rem; }
+.error-banner p { font-size: 0.9rem; line-height: 1.5; }
+.error-banner code {
+  background: rgba(248, 113, 113, 0.15);
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.85rem;
+}
 
 /* Drop zone */
 .drop-zone {
@@ -151,12 +158,7 @@ select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
   background: rgba(108, 140, 255, 0.05);
 }
 
-.drop-zone-icon {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  opacity: 0.6;
-}
-
+.drop-zone-icon { font-size: 2.5rem; margin-bottom: 0.5rem; opacity: 0.6; }
 .drop-zone p { color: var(--text-dim); }
 .drop-zone .browse { color: var(--accent); text-decoration: underline; cursor: pointer; }
 
@@ -173,7 +175,6 @@ select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
 .file-info .name { color: var(--accent); font-weight: 500; }
 .file-info .size { color: var(--text-dim); }
 
-/* Buttons */
 .btn {
   padding: 0.65rem 1.4rem;
   border: none;
@@ -186,16 +187,28 @@ select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
 
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
+.btn-row { display: flex; gap: 0.75rem; margin-top: 1rem; }
+
 .btn-primary {
   background: var(--accent);
   color: #fff;
-  width: 100%;
-  margin-top: 1rem;
+  flex: 1;
   padding: 0.8rem;
   font-size: 1rem;
 }
 
 .btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+
+.btn-danger {
+  background: var(--red);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  display: none;
+}
+
+.btn-danger.visible { display: block; }
+.btn-danger:hover:not(:disabled) { background: #ef4444; }
 
 .btn-sm {
   padding: 0.45rem 0.9rem;
@@ -207,18 +220,10 @@ select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
 
 .btn-sm:hover:not(:disabled) { background: var(--border); }
 
-/* Progress */
-.progress-area {
-  display: none;
-}
-
+.progress-area { display: none; }
 .progress-area.visible { display: block; }
 
-.progress-label {
-  font-size: 0.88rem;
-  color: var(--text-dim);
-  margin-bottom: 0.5rem;
-}
+.progress-label { font-size: 0.88rem; color: var(--text-dim); margin-bottom: 0.5rem; }
 
 .progress-bar-track {
   width: 100%;
@@ -247,17 +252,9 @@ select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
   100% { transform: translateX(400%); }
 }
 
-.progress-pct {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  text-align: right;
-}
+.progress-pct { font-size: 0.8rem; color: var(--text-dim); text-align: right; }
 
-/* Output */
-.output-area {
-  display: none;
-}
-
+.output-area { display: none; }
 .output-area.visible { display: block; }
 
 .output-header {
@@ -270,11 +267,7 @@ select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
 }
 
 .output-header h2 { margin-bottom: 0; }
-
-.output-actions {
-  display: flex;
-  gap: 0.5rem;
-}
+.output-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 
 .transcript-box {
   background: var(--surface2);
@@ -296,17 +289,10 @@ select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
   user-select: none;
 }
 
-/* Status messages */
-.status-msg {
-  text-align: center;
-  padding: 0.5rem;
-  font-size: 0.9rem;
-}
-
+.status-msg { text-align: center; padding: 0.5rem; font-size: 0.9rem; }
 .status-msg.error { color: var(--red); }
 .status-msg.success { color: var(--green); }
 
-/* Toast */
 .toast {
   position: fixed;
   bottom: 2rem;
@@ -322,10 +308,7 @@ select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
   z-index: 100;
 }
 
-.toast.show {
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
-}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
 footer {
   text-align: center;
@@ -342,6 +325,7 @@ footer a:hover { text-decoration: underline; }
   header h1 { font-size: 1.4rem; }
   .model-row { flex-direction: column; }
   .backend-info { text-align: left; }
+  .btn-row { flex-direction: column; }
 }
 </style>
 </head>
@@ -354,7 +338,11 @@ footer a:hover { text-decoration: underline; }
     <div class="privacy-badge">Your audio never leaves your device</div>
   </header>
 
-  <!-- Model settings -->
+  <div class="error-banner" id="errorBanner">
+    <h3>Multi-threading unavailable</h3>
+    <p id="errorText"></p>
+  </div>
+
   <div class="card">
     <h2>Model</h2>
     <div class="model-row">
@@ -368,13 +356,10 @@ footer a:hover { text-decoration: underline; }
           <option value="onnx-community/whisper-tiny">tiny (~40 MB)</option>
         </select>
       </label>
-      <div class="backend-info" id="backendInfo">
-        Detecting backend...
-      </div>
+      <div class="backend-info" id="backendInfo">Checking...</div>
     </div>
   </div>
 
-  <!-- Upload -->
   <div class="card">
     <h2>Audio / Video File</h2>
     <div class="drop-zone" id="dropZone">
@@ -387,10 +372,12 @@ footer a:hover { text-decoration: underline; }
       <span class="name" id="fileName"></span>
       <span class="size" id="fileSize"></span>
     </div>
-    <button class="btn btn-primary" id="transcribeBtn" disabled>Transcribe</button>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="transcribeBtn" disabled>Transcribe</button>
+      <button class="btn btn-danger" id="stopBtn">Stop</button>
+    </div>
   </div>
 
-  <!-- Progress -->
   <div class="card progress-area" id="progressArea">
     <h2>Progress</h2>
     <div class="progress-label" id="progressLabel">Initializing...</div>
@@ -400,7 +387,6 @@ footer a:hover { text-decoration: underline; }
     <div class="progress-pct" id="progressPct"></div>
   </div>
 
-  <!-- Output -->
   <div class="card output-area" id="outputArea">
     <div class="output-header">
       <h2>Transcript</h2>
@@ -424,28 +410,41 @@ footer a:hover { text-decoration: underline; }
 
 <div class="toast" id="toast"></div>
 
+<!-- Register COI service worker BEFORE the module script -->
+<script>
+if ('serviceWorker' in navigator && !window.crossOriginIsolated) {
+  navigator.serviceWorker.register('./coi-serviceworker.js').then(function(reg) {
+    console.log('[WhisperBatch] COI service worker registered');
+    if (reg.installing) {
+      reg.installing.addEventListener('statechange', function(e) {
+        if (e.target.state === 'activated') {
+          console.log('[WhisperBatch] COI SW activated — reloading...');
+          window.location.reload();
+        }
+      });
+    } else if (reg.active) {
+      // SW already active but page not isolated — reload
+      window.location.reload();
+    }
+  }).catch(function(err) {
+    console.warn('[WhisperBatch] COI SW failed:', err.message);
+  });
+}
+</script>
+
 <script type="module">
-import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1';
-
-// Disable local model check (we only use remote CDN models)
-env.allowLocalModels = false;
-
-// --- State ---
-let selectedFile = null;
-let transcriber = null;
-let currentModel = null;
-let chunks = []; // store {timestamp: [start, end], text} for SRT export
-let isTranscribing = false;
-
 // --- DOM refs ---
 const modelSelect = document.getElementById('modelSelect');
 const backendInfo = document.getElementById('backendInfo');
+const errorBanner = document.getElementById('errorBanner');
+const errorText = document.getElementById('errorText');
 const dropZone = document.getElementById('dropZone');
 const fileInput = document.getElementById('fileInput');
-const fileInfo = document.getElementById('fileInfo');
-const fileName = document.getElementById('fileName');
-const fileSize = document.getElementById('fileSize');
+const fileInfoEl = document.getElementById('fileInfo');
+const fileNameEl = document.getElementById('fileName');
+const fileSizeEl = document.getElementById('fileSize');
 const transcribeBtn = document.getElementById('transcribeBtn');
+const stopBtn = document.getElementById('stopBtn');
 const progressArea = document.getElementById('progressArea');
 const progressLabel = document.getElementById('progressLabel');
 const progressFill = document.getElementById('progressFill');
@@ -457,71 +456,185 @@ const copySrtBtn = document.getElementById('copySrtBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 const downloadSrtBtn = document.getElementById('downloadSrtBtn');
 const statusMsg = document.getElementById('statusMsg');
-const toast = document.getElementById('toast');
+const toastEl = document.getElementById('toast');
 
-// --- Backend detection ---
+// --- State ---
+let selectedFile = null;
+let worker = null;
+let isRunning = false;
+let systemReady = false;
 let useWebGPU = false;
+let chunks = [];
 
-async function detectBackend() {
-  try {
-    if (!navigator.gpu) throw new Error('No WebGPU');
-    const adapter = await navigator.gpu.requestAdapter();
-    if (!adapter) throw new Error('No adapter');
-    useWebGPU = true;
-    backendInfo.innerHTML = 'Backend: <span class="chip webgpu">WebGPU</span>';
-  } catch {
-    useWebGPU = false;
-    backendInfo.innerHTML = 'Backend: <span class="chip wasm">WASM</span>';
+// ========================================================
+// HARD REQUIREMENT: Multi-threading check on startup
+// The app will NOT allow transcription without it.
+// ========================================================
+function checkSystem() {
+  const isolated = window.crossOriginIsolated;
+  const cores = navigator.hardwareConcurrency || 1;
+  const hasSAB = typeof SharedArrayBuffer !== 'undefined';
+
+  console.log('[WhisperBatch] System check:',
+    'crossOriginIsolated=' + isolated,
+    'SharedArrayBuffer=' + hasSAB,
+    'cores=' + cores);
+
+  if (!isolated || !hasSAB) {
+    systemReady = false;
+    errorBanner.classList.add('visible');
+    errorText.innerHTML =
+      'This app requires cross-origin isolation to use all your CPU cores. ' +
+      'SharedArrayBuffer is not available.<br><br>' +
+      'If this is your first visit, <strong>reload the page</strong> — a service worker is activating that enables this.<br><br>' +
+      'If reloading doesn\'t fix it: serve this via HTTP (<code>python -m http.server</code>) not <code>file://</code>.';
+    transcribeBtn.disabled = true;
+    backendInfo.innerHTML = '<span class="chip bad">Blocked — reload page</span>';
+    return;
   }
+
+  if (cores < 2) {
+    // Still let them run, but warn
+    console.warn('[WhisperBatch] Only 1 core detected');
+  }
+
+  systemReady = true;
+  errorBanner.classList.remove('visible');
+  console.log('[WhisperBatch] System check passed: ' + cores + ' cores, SharedArrayBuffer available');
+}
+
+checkSystem();
+
+// --- Detect WebGPU (for display — worker will also check) ---
+async function detectBackend() {
+  if (!systemReady) return;
+
+  try {
+    if (navigator.gpu) {
+      const adapter = await navigator.gpu.requestAdapter();
+      if (adapter) useWebGPU = true;
+    }
+  } catch {}
+
+  const cores = navigator.hardwareConcurrency || 1;
+  const compute = useWebGPU ? '<span class="chip ok">WebGPU</span>' : '<span class="chip warn">CPU</span>';
+  backendInfo.innerHTML = compute + ' <span class="chip ok">' + cores + ' cores</span>';
+
+  console.log('[WhisperBatch] Backend:', useWebGPU ? 'WebGPU' : 'CPU (WASM)', '|', cores, 'cores');
 }
 
 detectBackend();
 
-// --- File handling ---
-function formatBytes(bytes) {
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-  return (bytes / 1048576).toFixed(1) + ' MB';
+// ========================================================
+// WORKER MANAGEMENT
+// All heavy work runs in a Web Worker.
+// Stop = worker.terminate() — instant, unkillable.
+// ========================================================
+function createWorker() {
+  const w = new Worker('./worker.js', { type: 'module' });
+
+  w.addEventListener('message', handleWorkerMessage);
+
+  w.addEventListener('error', (e) => {
+    console.error('[WhisperBatch] Worker error:', e.message);
+    showStatus('Worker error: ' + e.message, true);
+    exitRunningState();
+  });
+
+  return w;
 }
 
-function handleFile(file) {
-  if (!file) return;
-  selectedFile = file;
-  fileName.textContent = file.name;
-  fileSize.textContent = formatBytes(file.size);
-  fileInfo.classList.add('visible');
-  transcribeBtn.disabled = false;
-  statusMsg.textContent = '';
-  statusMsg.className = 'status-msg';
+function handleWorkerMessage(e) {
+  const msg = e.data;
+
+  switch (msg.type) {
+    case 'capabilities':
+      console.log('[WhisperBatch] Worker capabilities:', msg);
+      break;
+
+    case 'log':
+      console.log('[WhisperBatch/Worker]', msg.text);
+      break;
+
+    case 'progress': {
+      const p = msg.progress;
+      if (p.status === 'download' || p.status === 'progress') {
+        const pct = p.progress || 0;
+        const file = p.file ? p.file.split('/').pop() : '';
+        showProgress('Downloading ' + file + '...', pct);
+      } else if (p.status === 'done') {
+        showProgress('Loading model into memory (this can take a few minutes)...', null);
+      } else if (p.status === 'ready') {
+        showProgress('Model ready', 100);
+      } else if (p.status === 'initiate') {
+        // File fetch starting — no UI update needed
+      }
+      break;
+    }
+
+    case 'model-ready':
+      console.log('[WhisperBatch] Model ready' + (msg.cached ? ' (cached)' : ''));
+      showProgress('Decoding audio...', null);
+      // Now send audio to worker
+      sendAudioToWorker();
+      break;
+
+    case 'chunk-done':
+      showProgress('Transcribing... (chunk ' + msg.chunkCount + ', ' + msg.elapsed + 's)', null);
+      break;
+
+    case 'result':
+      hideProgress();
+      chunks = msg.chunks || [];
+      if (chunks.length > 0) {
+        renderTranscript(chunks);
+      } else {
+        transcriptBox.textContent = msg.text || '(No speech detected)';
+        chunks = [{ timestamp: [0, null], text: msg.text || '' }];
+        outputArea.classList.add('visible');
+      }
+      showStatus('Transcription complete in ' + msg.totalTime + 's.', false);
+      exitRunningState();
+      break;
+
+    case 'error':
+      hideProgress();
+      console.error('[WhisperBatch] Worker error (' + msg.phase + '):', msg.message);
+      let text = msg.message;
+      if (text.includes('Array buffer allocation failed')) {
+        text = 'Out of memory. Try a smaller model.';
+      }
+      showStatus('Error: ' + text, true);
+      exitRunningState();
+      break;
+  }
 }
 
-dropZone.addEventListener('click', () => fileInput.click());
+// We store the decoded audio so we can send it after model loads
+let pendingAudio = null;
 
-dropZone.addEventListener('dragover', (e) => {
-  e.preventDefault();
-  dropZone.classList.add('drag-over');
-});
+async function sendAudioToWorker() {
+  if (!selectedFile || !worker) return;
 
-dropZone.addEventListener('dragleave', () => {
-  dropZone.classList.remove('drag-over');
-});
+  showProgress('Decoding audio...', null);
+  try {
+    const audioData = await decodeAudio(selectedFile);
+    pendingAudio = null;
+    // Transfer the buffer (zero-copy) to the worker
+    worker.postMessage({ type: 'transcribe', audioData }, [audioData.buffer]);
+    showProgress('Transcribing...', null);
+  } catch (err) {
+    hideProgress();
+    showStatus('Error decoding audio: ' + err.message, true);
+    exitRunningState();
+  }
+}
 
-dropZone.addEventListener('drop', (e) => {
-  e.preventDefault();
-  dropZone.classList.remove('drag-over');
-  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-});
-
-fileInput.addEventListener('change', () => {
-  if (fileInput.files.length) handleFile(fileInput.files[0]);
-});
-
-// --- Audio decoding ---
+// --- Audio decoding (runs on main thread — fast, doesn't block) ---
 async function decodeAudio(file) {
   const arrayBuffer = await file.arrayBuffer();
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
   const decoded = await audioCtx.decodeAudioData(arrayBuffer);
-  // Mix down to mono Float32Array
   const numChannels = decoded.numberOfChannels;
   const length = decoded.length;
   const mono = new Float32Array(length);
@@ -540,7 +653,56 @@ async function decodeAudio(file) {
   return mono;
 }
 
-// --- Progress helpers ---
+// --- File handling ---
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / 1048576).toFixed(1) + ' MB';
+}
+
+function handleFile(file) {
+  if (!file) return;
+  selectedFile = file;
+  fileNameEl.textContent = file.name;
+  fileSizeEl.textContent = formatBytes(file.size);
+  fileInfoEl.classList.add('visible');
+  if (systemReady && !isRunning) transcribeBtn.disabled = false;
+  statusMsg.textContent = '';
+  statusMsg.className = 'status-msg';
+}
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', () => {
+  if (fileInput.files.length) handleFile(fileInput.files[0]);
+});
+
+// --- UI state ---
+function enterRunningState() {
+  isRunning = true;
+  transcribeBtn.disabled = true;
+  stopBtn.classList.add('visible');
+  modelSelect.disabled = true;
+  outputArea.classList.remove('visible');
+  statusMsg.textContent = '';
+  statusMsg.className = 'status-msg';
+  chunks = [];
+}
+
+function exitRunningState() {
+  isRunning = false;
+  transcribeBtn.disabled = !selectedFile || !systemReady;
+  stopBtn.classList.remove('visible');
+  modelSelect.disabled = false;
+}
+
+// --- Progress ---
 function showProgress(label, pct) {
   progressArea.classList.add('visible');
   progressLabel.textContent = label;
@@ -555,104 +717,48 @@ function showProgress(label, pct) {
   }
 }
 
-function hideProgress() {
-  progressArea.classList.remove('visible');
+function hideProgress() { progressArea.classList.remove('visible'); }
+
+function showStatus(text, isError) {
+  statusMsg.textContent = text;
+  statusMsg.className = 'status-msg ' + (isError ? 'error' : 'success');
 }
 
-// --- Pipeline loading ---
-async function loadPipeline(modelId) {
-  if (transcriber && currentModel === modelId) return transcriber;
+// ========================================================
+// TRANSCRIBE — reuses worker if alive, creates new if needed
+// Model stays loaded in worker memory between runs.
+// ========================================================
+transcribeBtn.addEventListener('click', () => {
+  if (!selectedFile || isRunning || !systemReady) return;
+  enterRunningState();
 
-  transcriber = null;
-  currentModel = null;
-
-  showProgress('Downloading model: ' + modelId.split('/')[1] + '...', 0);
-
-  const dtype = useWebGPU ? { encoder_model: 'fp32', decoder_model_merged: 'q4' } : { encoder_model: 'fp32', decoder_model_merged: 'q8' };
-  const device = useWebGPU ? 'webgpu' : 'wasm';
-
-  transcriber = await pipeline('automatic-speech-recognition', modelId, {
-    dtype,
-    device,
-    progress_callback: (progress) => {
-      if (progress.status === 'download' || progress.status === 'progress') {
-        const pct = progress.progress || 0;
-        const file = progress.file ? progress.file.split('/').pop() : '';
-        showProgress('Downloading ' + file + '...', pct);
-      } else if (progress.status === 'done') {
-        showProgress('Loading model into memory...', null);
-      } else if (progress.status === 'ready') {
-        showProgress('Model ready', 100);
-      }
-    }
-  });
-
-  currentModel = modelId;
-  return transcriber;
-}
-
-// --- Transcription ---
-transcribeBtn.addEventListener('click', async () => {
-  if (!selectedFile || isTranscribing) return;
-  isTranscribing = true;
-  transcribeBtn.disabled = true;
-  outputArea.classList.remove('visible');
-  statusMsg.textContent = '';
-  statusMsg.className = 'status-msg';
-  chunks = [];
-
-  try {
-    const modelId = modelSelect.value;
-
-    // Load model
-    await loadPipeline(modelId);
-
-    // Decode audio
-    showProgress('Decoding audio...', null);
-    const audioData = await decodeAudio(selectedFile);
-
-    // Transcribe
-    showProgress('Transcribing...', 0);
-
-    const result = await transcriber(audioData, {
-      chunk_length_s: 30,
-      stride_length_s: 5,
-      return_timestamps: true,
-      language: null, // auto-detect
-      callback_function: (beams) => {
-        // Called per chunk output — show partial text
-        if (beams && beams[0] && beams[0].output_token_ids) {
-          showProgress('Transcribing...', null);
-        }
-      }
-    });
-
-    hideProgress();
-
-    // Process results
-    if (result.chunks && result.chunks.length > 0) {
-      chunks = result.chunks;
-      renderTranscript(chunks);
-    } else {
-      transcriptBox.textContent = result.text || '(No speech detected)';
-      chunks = [{ timestamp: [0, null], text: result.text || '' }];
-      outputArea.classList.add('visible');
-    }
-
-    statusMsg.textContent = 'Transcription complete.';
-    statusMsg.className = 'status-msg success';
-  } catch (err) {
-    hideProgress();
-    console.error(err);
-    statusMsg.textContent = 'Error: ' + err.message;
-    statusMsg.className = 'status-msg error';
-  } finally {
-    isTranscribing = false;
-    transcribeBtn.disabled = !selectedFile;
+  // Reuse existing worker (keeps model in memory), create if needed
+  if (!worker) {
+    worker = createWorker();
   }
+
+  showProgress('Loading model...', 0);
+  worker.postMessage({
+    type: 'load',
+    modelId: modelSelect.value,
+    useWebGPU,
+  });
 });
 
-// --- Render transcript with timestamps ---
+// ========================================================
+// STOP — terminates the worker instantly. No negotiation.
+// ========================================================
+stopBtn.addEventListener('click', () => {
+  if (!isRunning || !worker) return;
+  console.log('[WhisperBatch] STOP — terminating worker');
+  worker.terminate();
+  worker = null;
+  hideProgress();
+  showStatus('Stopped.', false);
+  exitRunningState();
+});
+
+// --- Render transcript ---
 function renderTranscript(chunks) {
   transcriptBox.innerHTML = '';
   for (const chunk of chunks) {
@@ -676,12 +782,8 @@ function formatTime(seconds) {
   return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0') + ',' + String(ms).padStart(3, '0');
 }
 
-// --- Plain text export ---
-function getPlainText() {
-  return chunks.map(c => c.text.trim()).join('\n').trim();
-}
+function getPlainText() { return chunks.map(c => c.text.trim()).join('\n').trim(); }
 
-// --- SRT export ---
 function getSRT() {
   return chunks.map((c, i) => {
     const [start, end] = c.timestamp;
@@ -689,17 +791,15 @@ function getSRT() {
   }).join('\n');
 }
 
-// --- Copy / Download ---
 function showToast(msg) {
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2000);
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  setTimeout(() => toastEl.classList.remove('show'), 2000);
 }
 
 copyBtn.addEventListener('click', () => {
   navigator.clipboard.writeText(getPlainText()).then(() => showToast('Copied to clipboard'));
 });
-
 copySrtBtn.addEventListener('click', () => {
   navigator.clipboard.writeText(getSRT()).then(() => showToast('SRT copied to clipboard'));
 });
@@ -718,21 +818,18 @@ downloadBtn.addEventListener('click', () => {
   const base = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') : 'transcript';
   downloadFile(getPlainText(), base + '.txt', 'text/plain');
 });
-
 downloadSrtBtn.addEventListener('click', () => {
   const base = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') : 'transcript';
   downloadFile(getSRT(), base + '.srt', 'text/plain');
 });
 
-// --- Prevent model selector change during transcription ---
 modelSelect.addEventListener('change', () => {
-  if (isTranscribing) {
-    modelSelect.value = currentModel;
-    return;
+  if (isRunning) return;
+  // Kill worker so next transcription loads the new model
+  if (worker) {
+    worker.terminate();
+    worker = null;
   }
-  // Reset pipeline so next transcription loads the new model
-  transcriber = null;
-  currentModel = null;
 });
 </script>
 

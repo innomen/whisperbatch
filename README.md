@@ -1,33 +1,46 @@
 # WhisperBatch
 
-**Private speech-to-text transcription, entirely in your browser.**
+**Private speech-to-text transcription.**
 
-No installs. No uploads. No servers. Your audio never leaves your device.
+No uploads. No servers. Your audio never leaves your device.
+
+## Web App
 
 **[Launch WhisperBatch](https://innomen.github.io/WhisperBatch/)**
 
-## How it works
+Runs OpenAI Whisper directly in your browser using [Transformers.js](https://huggingface.co/docs/transformers.js). The model downloads once from HuggingFace CDN and caches in your browser.
 
-WhisperBatch runs OpenAI's Whisper speech recognition model directly in your browser using [Transformers.js](https://huggingface.co/docs/transformers.js). The model downloads once from HuggingFace CDN and caches in your browser for offline use.
-
+- **Multi-threaded** — uses all CPU cores (requires cross-origin isolation via service worker)
 - **WebGPU acceleration** when available, with automatic WASM fallback
+- **Web Worker architecture** — UI never freezes, stop button works instantly
 - **Multiple model sizes** from tiny (~40 MB) to large-v3-turbo (~800 MB)
 - **Timestamped output** with SRT export
 - **Supports audio and video files** — MP3, WAV, FLAC, OGG, M4A, MP4, WebM, and more
 
-## Usage
+### Local development
 
-1. Open the app in a modern browser (Chrome/Edge recommended for WebGPU)
-2. Select a model size (large-v3-turbo is default for best accuracy)
-3. Drop an audio or video file onto the upload area
-4. Click **Transcribe** and wait for the result
-5. Copy or download your transcript
+Serve via HTTP (required for service worker / SharedArrayBuffer):
 
-The first run downloads the model (~800 MB for the default). Subsequent runs use the cached model instantly.
+```bash
+cd WhisperBatch
+python -m http.server 8080
+# Open http://localhost:8080
+```
+
+## Python CLI
+
+For local use without a browser, `transcribe.py` uses OpenAI Whisper (large-v3) directly:
+
+```bash
+pip install openai-whisper
+python transcribe.py yourfile.mp3
+```
+
+Outputs `yourfile.srt` in the same directory. Requires `ffmpeg`.
 
 ## Privacy
 
-All audio processing happens locally in your browser. Nothing is uploaded to any server. The only network request is the one-time model download from HuggingFace CDN.
+All processing happens locally. The only network request is the one-time model download.
 
 ## Credits
 
